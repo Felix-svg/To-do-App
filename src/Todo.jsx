@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Todo() {
-  const [tasks, setTasks] = useState(["To-do List App", "Nyumbani"]);
+  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
   function handleInputChange(e) {
@@ -23,23 +23,24 @@ function Todo() {
   }
 
   return (
-    <div>
+    <div className="to-do-container">
       <h1>To-do List App</h1>
-      <div>
+      <div className="add-task">
         <input
           type="text"
           value={newTask}
           onChange={handleInputChange}
           placeholder="Enter a task..."
         />
-        <button onClick={handleAddTask}>Add task</button>
+        <button onClick={handleAddTask} className="add-button">Add task</button>
       </div>
-      <div>
+      <div className="to-do-list">
+        {tasks.length > 0 ? <h4>Your Tasks</h4> : null}
         <ol>
           {tasks.map((task, index) => (
             <li key={index}>
               <span>{task}</span>
-              <button onClick={() => handleTaskDelete(index)}>x</button>
+              <button onClick={() => handleTaskDelete(index)} className="delete-button">x</button>
             </li>
           ))}
         </ol>
