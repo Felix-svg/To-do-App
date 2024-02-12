@@ -9,9 +9,17 @@ function Todo() {
   }
 
   function handleAddTask() {
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-    setNewTask("");
+    //ensures only non-empty tasks are added
+    if (newTask.trim() !== "") {
+      const updatedTasks = [...tasks, newTask];
+      setTasks(updatedTasks);
+      setNewTask("");
+    }
+  }
+
+  function handleTaskDelete(index) {
+    const filteredTasks = tasks.filter((_, i) => i !== index);
+    setTasks(filteredTasks);
   }
 
   return (
@@ -29,7 +37,10 @@ function Todo() {
       <div>
         <ol>
           {tasks.map((task, index) => (
-            <li key={index}>{task}</li>
+            <li key={index}>
+              <span>{task}</span>
+              <button onClick={() => handleTaskDelete(index)}>x</button>
+            </li>
           ))}
         </ol>
       </div>
